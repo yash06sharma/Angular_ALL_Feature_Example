@@ -1,0 +1,92 @@
+<mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Basic Details</ng-template>
+          <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" />
+          </mat-form-field>
+          <div *ngIf="submitted && ff['name'].errors && ff['name'].touched">
+              <span style="color: red;" *ngIf="ff['name'].errors['required']">
+                  <p>This field is required</p>
+              </span>
+          </div>
+
+          <br />
+
+          <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input
+                matInput
+                placeholder="Email"
+                formControlName="email"/>
+          </mat-form-field>
+          <div *ngIf="submitted && ff['email'].errors && ff['email'].touched">
+              <span style="color: red;" *ngIf="ff['email'].errors['required']"><p>This field is required</p></span>
+              <span style="color: red;" *ngIf="ff['email'].errors?.['pattern']"><p>Please enter valid email address</p></span>
+          </div>
+          <div>
+              <button mat-button matStepperNext (click)="chcekError()">Next</button>
+          </div>
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Mobile & Address</ng-template>
+            <mat-form-field>
+                <mat-label>Mobile</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  placeholder="Mobile"
+                  formControlName="mobile"/>
+            </mat-form-field>
+            <div *ngIf="submitted && sf['mobile'].errors && sf['mobile'].touched">
+                <span style="color: red;" *ngIf="sf['mobile'].errors['required']"><p>This field is required</p></span>
+                <span style="color: red;" *ngIf="sf['mobile'].errors?.['pattern']">Invalid phone number.</span>
+            </div>
+            <br />
+
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput placeholder="Address" formControlName="address" />
+            </mat-form-field>
+            <div *ngIf="submitted && sf['address'].errors && sf['address'].touched">
+                <span style="color: red;" *ngIf="sf['address'].errors['required']"><p>This field is required</p></span>
+            </div>
+            <br />
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext (click)="chcekErrorSencondForm()">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        <p>You are now done.</p>
+        <mat-list>
+            <mat-list-item>
+                <strong>Name:</strong>
+                {{ this.firstFormGroup.value.name }}
+            </mat-list-item>
+            <mat-list-item>
+                <strong>Email:</strong>
+                {{ this.firstFormGroup.value.email }}
+            </mat-list-item>
+            <mat-list-item>
+                <strong>Mobile Number:</strong>
+                {{ this.secondFormGroup.value.mobile }}
+            </mat-list-item>
+            <mat-list-item>
+                <strong>Address:</strong>
+                {{ this.secondFormGroup.value.address }}
+            </mat-list-item>
+        </mat-list>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+            <button type="submit" mat-button (click)="submit()">Submit</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

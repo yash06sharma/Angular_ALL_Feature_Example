@@ -1,0 +1,21 @@
+<h4>Selection Process</h4>
+
+<select class="form-select" aria-label="Default select example"
+(change)="selectCountry($event.target)">
+    <option disabled selected value="">-Country-</option>
+    <option value="India">India</option>
+    <option value="China">China</option>
+    <option value="Rusia">Rusia</option>
+</select> <br>
+
+<select class="form-select" aria-label="Default select example"
+[attr.disabled]="cityshow ? null:'disabled'" (change)="selectState($event.target)">
+    <option disabled selected value="">-State-</option>
+    <option *ngFor="let city of City" [value]="city">{{ city }}</option>
+</select><br>
+
+<select class="form-select" aria-label="Default select example"
+[attr.disabled]="zipshow ? null:'disabled'" (change)="selectZip($event.target)">
+    <option disabled selected value="">-Zip-</option>
+    <option [value]="Zip">{{ Zip }}</option>
+</select>

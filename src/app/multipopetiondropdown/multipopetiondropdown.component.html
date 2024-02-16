@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="example-form" [formGroup]="multiDrop" novalidate>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Ex. Yash..." value="" formControlName="name">
+                </mat-form-field>
+                <div *ngIf="submitted && f['name'].errors && f['name'].touched">
+                    <div style="color: red;" *ngIf="f['name'].errors['required']">This field is required</div>
+                </div>
+                <mat-form-field>
+                    <mat-select placeholder="Hobbies" [formControl]="toppings" (formData.append[(value)]="selectedToppings" multiple formControlName="hobbies">
+                        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div *ngIf="submitted && f['hobbies'].errors && f['hobbies'].touched">
+                    <div style="color: red;" *ngIf="f['hobbies'].errors['required']">This field is required</div>
+                </div><br>
+                    <button class="btn btn-primary" (click)="onsumit()" [style.display]="addButton">Register</button>
+                    <button class="btn btn-info" (click)="updateTableValue()" [style.display]="editButton">Update</button>
+          </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Hobbies</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let x of dataSource">
+                        <th scope="row">{{x.position}}</th>
+                        <td>{{x.name}}</td>
+                        <td>{{x.hobbies}}</td>
+                        <td>
+                          <button class="btn btn-secondary btn-sm" (click)="editTableValue(x)">Edit</button>&nbsp;
+                          <button class="btn btn-warning btn-sm"(click)="deletevalue(x.position)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

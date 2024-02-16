@@ -1,0 +1,56 @@
+<!-- <p>register-component works!</p> -->
+<div class="container">
+  <div class="row">
+    <h1>#Add</h1>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+
+
+      <form class="example-form" [formGroup]="RegistrationForm" novalidate>
+      <div class="mb-3 row">
+        <label for="Name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" id="name" value="" formControlName="name">
+            <div *ngIf="submitted && f['name'].errors && f['name'].touched">
+              <div style="color: red;" *ngIf="f['name'].errors['required']">This field is required</div>
+            </div>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="Email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-8">
+          <input type="email" class="form-control" id="email" value="" formControlName="email">
+          <div *ngIf="submitted && f['email'].errors && f['email'].touched">
+            <div style="color: red;" *ngIf="f['email'].errors['required']">This field is required</div>
+            <div style="color: red;" *ngIf="f['email'].errors?.['pattern']">Please enter valid email address</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label for="Password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-8">
+          <input type="password" class="form-control" id="password" value="" formControlName="password">
+            <div *ngIf="submitted && f['password'].errors && f['password'].touched">
+              <div style="color: red;" *ngIf="f['password'].errors['required']">This field is required</div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-5 d-flex justify-content-center">
+
+        <button type="button" class="btn btn-primary" (click)="addUserRecord()">ADD</button>&nbsp;
+        <!-- <button class="btnsection" [mat-dialog-close]>
+          <mat-icon>highlight_off</mat-icon>
+        </button> -->
+        <button type="button" class="btn btn-outline-warning" [mat-dialog-close]>Close</button>
+
+      </div>
+        </form>
+
+
+    </div>
+  </div>

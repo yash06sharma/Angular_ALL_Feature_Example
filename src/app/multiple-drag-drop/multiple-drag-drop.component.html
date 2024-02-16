@@ -1,0 +1,38 @@
+<div cdkDropListGroup>
+    <div class="row">
+        <div class="col-sm-6">
+            <input class="form-control" type="text" #value/>
+      </div>
+      <div class="col-sm-2">
+            <button class="btn btn-light" (click)="getValue(value)">ADD</button>
+      </div>
+    </div>
+
+    <div class="example-container">
+        <h2>UnComplete Task</h2>
+        <div
+          cdkDropList
+          [cdkDropListData]="todo"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo;track item" cdkDrag>
+                {{ item }}
+              </div>
+        </div>
+    </div>
+
+
+    <div class="example-container">
+        <h2>Complete Task</h2>
+        <div
+          cdkDropList
+          [cdkDropListData]="done"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of done;track item" cdkDrag>
+              {{ item }}
+            </div>
+        </div>
+    </div>
+
+</div>

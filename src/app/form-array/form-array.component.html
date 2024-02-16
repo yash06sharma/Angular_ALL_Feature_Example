@@ -1,0 +1,211 @@
+<p>form-array works!</p>
+<h1 class="text-center">Form Array</h1>
+<div class="container">
+    <div class="row">
+        <form [formGroup]="skillsForm" novalidate>
+            <label for="name">Add More </label>
+            <button class="btn btn-light" type="button" (click)="addReg()">
+              ADD +
+            </button>
+            <p>
+                <label for="name">Name: </label>&nbsp;
+                <mat-form-field appearance="fill">
+                    <mat-label>User Name</mat-label>
+                    <input matInput placeholder="Yash..." id="name" name="name" formControlName="name">
+                </mat-form-field>
+          </p>
+          <div *ngIf="submitted && f['name'].errors && f['name'].touched">
+                <div style="color: red;" *ngIf="f['name'].errors['required']"><p>This field is required</p></div>
+          </div>
+
+          <p>
+              <label for="phone">Phone: </label>&nbsp;
+              <mat-form-field appearance="fill">
+                  <mat-label>Number</mat-label>
+                  <input matInput placeholder="xxx..." type="number" id="phone" name="phone" formControlName="phone">
+              </mat-form-field>
+          </p>
+          <div *ngIf="submitted && f['phone'].errors && f['phone'].touched">
+                <div style="color: red;" *ngIf="f['phone'].errors['required']"><p>This field is required</p></div>
+                <div style="color: red;" *ngIf="f['phone'].errors?.['pattern']">Invalid phone number.</div>
+          </div>
+
+          <p>
+              <label for="email">Email: </label>&nbsp;
+              <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="yash@gmail.com..." id="email" name="email" formControlName="email">
+              </mat-form-field>
+          </p>
+              <div *ngIf="submitted && f['email'].errors && f['email'].touched">
+                <div style="color: red;" *ngIf="f['email'].errors['required']"><p>This field is required</p></div>
+                <div style="color: red;" *ngIf="f['email'].errors?.['pattern']"><p>Please enter valid email address</p></div>
+              </div>
+
+          <p>
+              <label for="address">Address </label>
+              <button class="btn btn-light" type="button" (click)="addSkill()">
+                ADD
+              </button>
+          </p>
+
+          <form [formGroup]="skillsForm">
+              <div formArrayName="addresses">
+                  <div *ngFor="let skillGroup of addresses.controls; let i = index">
+                      <div [formGroupName]="i">
+                          <h4>Address: {{i+1}}</h4>
+                          <p>
+                              <label for="state{{i}}">State {{i + 1}}:</label>&nbsp;
+                              <mat-form-field appearance="fill">
+                                <mat-label>State</mat-label>
+                                <input matInput placeholder="M.P..." id="state{{i}}" formControlName="state">
+                              </mat-form-field>
+                          </p>
+                          <div *ngIf="submitted && skillGroup?.get('state')?.errors?.['required'] && skillGroup?.get('state')?.touched">
+                            <div style="color: red;" *ngIf="skillGroup?.get('state')?.errors?.['required']" class="validation">* required</div>
+                          </div>
+
+                          <p>
+                              <label for="city{{i}}">City {{i + 1}}:</label>
+                              &nbsp;
+                              <mat-form-field appearance="fill">
+                                  <mat-label>City</mat-label>
+                                  <input matInput placeholder="Ujjain..." id="city{{i}}" formControlName="city">
+                              </mat-form-field>
+                          </p>
+                          <div *ngIf="submitted && skillGroup?.get('city')?.errors?.['required'] && skillGroup?.get('city')?.touched">
+                              <div style="color: red;" *ngIf="skillGroup?.get('city')?.errors?.['required']" class="validation">* required</div>
+                          </div>
+
+                          <p>
+                              <label for="zip{{i}}">Zip {{i + 1}}:</label>
+                              &nbsp;
+                              <mat-form-field appearance="fill">
+                                  <mat-label>Zip</mat-label>
+                                  <input matInput placeholder="xxx..." type="number" id="zip{{i}}" formControlName="zip">
+                              </mat-form-field>
+                              <button type="button" (click)="removeSkill(i)" class="btn btn-warning btn-sm">Remove</button>
+                          </p>
+                          <div *ngIf="submitted && skillGroup?.get('zip')?.errors?.['required'] && skillGroup?.get('zip')?.touched">
+                            <div style="color: red;" *ngIf="skillGroup?.get('zip')?.errors?.['required']" class="validation">* required</div>
+                         </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+
+      <!-- //-------------------Complete Reg FOrm Copy------------ -->
+      <form [formGroup]="skillsForm">
+          <div formArrayName="registeration">
+            <div *ngFor="let skillGroup of registeration; let i = index">
+              <div [formGroupName]="i">
+                <h4>Registration: {{i+1}}</h4>
+
+                <p>
+                  <label for="state{{i}}">Name {{i + 1}}:</label>
+                  &nbsp;
+                <mat-form-field appearance="fill">
+                  <mat-label>User Name</mat-label>
+                  <input matInput placeholder="Yash..." type="text" id="Name:{{i}}" formControlName="name">
+                </mat-form-field>
+                </p>
+
+                <div *ngIf="submitted && skillGroup?.get('name')?.errors?.['required'] && skillGroup?.get('name')?.touched">
+                  <div style="color: red;" *ngIf="skillGroup?.get('name')?.errors?.['required']" class="validation">* required</div>
+                </div>
+
+                <p>
+                  <label for="Phone{{i}}">Phone {{i + 1}}:</label>
+                  &nbsp;
+                <mat-form-field appearance="fill">
+                  <mat-label>Number</mat-label>
+                  <input matInput placeholder="xxx..." type="number" id="Phone{{i}}" formControlName="phone">
+                </mat-form-field>
+              </p>
+
+              <div *ngIf="submitted && skillGroup?.get('phone')?.errors?.['required'] && skillGroup?.get('phone')?.touched">
+                  <div style="color: red;" *ngIf="skillGroup?.get('phone')?.errors?.['required']" class="validation">* required</div>
+              </div>
+                  <div *ngIf="submitted && skillGroup?.get('phone')?.errors?.['pattern'] && skillGroup?.get('phone')?.touched">
+                  <div style="color: red;" *ngIf="skillGroup?.get('phone')?.errors?.['pattern']">*Invalid phone number.</div>
+              </div>
+
+              <p>
+                  <label for="Email{{i}}">Email {{i + 1}}:</label>
+                  &nbsp;
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="Yash@gmail.com..." type="text" id="Email{{i}}" formControlName="email">
+                </mat-form-field>
+                  <button type="button" (click)="removeRegSkill(i)" class="btn btn-warning btn-sm">Remove</button>
+              </p>
+
+              <div *ngIf="submitted && skillGroup?.get('email')?.errors?.['required'] && skillGroup?.get('email')?.touched">
+                  <div style="color: red;" *ngIf="skillGroup?.get('email')?.errors?.['required']" class="validation">* required</div>
+              </div>
+              <div *ngIf="submitted && skillGroup?.get('email')?.errors?.['pattern'] && skillGroup?.get('email')?.touched">
+                  <div style="color: red;" *ngIf="skillGroup?.get('email')?.errors?.['pattern']"><p>Please enter valid email address</p></div>
+              </div>
+
+                <div>
+                  <div formArrayName="regAddress">
+                    <div *ngFor="let regAddressGroup of getRegAddressControls(i); let j = index">
+                      <div [formGroupName]="j">
+                        <h4>Reg-Address: {{j+1}}</h4>
+
+                        <div>
+                          <label for="state{{i}}">State {{j + 1}}:</label>&nbsp;
+                          <mat-form-field appearance="fill">
+                              <mat-label>State</mat-label>
+                              <input matInput placeholder="M.P..." id="state{{i}}" formControlName="state">
+                          </mat-form-field>
+                        </div>
+
+                        <div *ngIf="submitted && regAddressGroup?.get('state')?.errors?.['required'] && regAddressGroup?.get('state')?.touched">
+                            <div style="color: red;" *ngIf="regAddressGroup?.get('state')?.errors?.['required']" class="validation">* required</div>
+                        </div>
+
+                        <div>
+                          <label for="city{{i}}">City {{i + 1}}:</label>
+                          &nbsp;
+                          <mat-form-field appearance="fill">
+                              <mat-label>City</mat-label>
+                              <input matInput placeholder="Ujjain..." id="city{{i}}" formControlName="city">
+                          </mat-form-field>
+                        </div>
+
+                        <div *ngIf="submitted && regAddressGroup?.get('city')?.errors?.['required'] && regAddressGroup?.get('city')?.touched">
+                            <div style="color: red;" *ngIf="regAddressGroup?.get('city')?.errors?.['required']" class="validation">* required</div>
+                        </div>
+
+                        <div>
+                          <label for="zip{{i}}">Zip {{i + 1}}:</label>
+                          &nbsp;
+                          <mat-form-field appearance="fill">
+                              <mat-label>Zip</mat-label>
+                              <input matInput placeholder="xxx..." type="number" id="zip{{i}}" formControlName="zip">
+                          </mat-form-field>
+                             <button type="button" (click)="removeRegSkillAddress(i,j)" class="btn btn-warning btn-sm">Remove</button>
+                        </div>
+
+                        <div *ngIf="submitted && regAddressGroup?.get('zip')?.errors?.['required'] && regAddressGroup?.get('zip')?.touched">
+                            <div style="color: red;" *ngIf="regAddressGroup?.get('zip')?.errors?.['required']" class="validation">* required</div>
+                        </div>
+                      </div>
+                    </div>
+                    <label for="name">Address </label>
+                    <button class="btn btn-light" type="button" (click)="addRegistrationAddress(i)">ADD</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+      </form>
+        <p>
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
+          </p>
+
+        </form>
+    </div>
+</div>

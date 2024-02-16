@@ -1,28 +1,72 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <table class="table">
-        <thead>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-5 col-md-5" >
+        <form [formGroup]="add_User">
 
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Role</th>
-            <th scope="col"> Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let x of app_Storage_Data">
-            <td>{{x.id}}</td>
-            <td>{{x.role}}</td>
-            <td>{{x.name}}</td>
-            <td>
-              <button type="button" class="btn btn-warning" (click)="get_ID_DATA(x.id)">Select</button>
-            </td>
-          </tr>
+          <div class="mb-3 row">
+            <label for="Name" class="col-sm-2 col-form-label">Nama</label>
+            <div class="col-sm-5">
+              <input type="text" class="form-control" id="Name" value="" formControlName="name">
+              <div *ngIf="submitted && f['name'].errors && f['name'].touched">
+                <div style="color: red;" *ngIf="f['name'].errors['required']">This field is required</div>
 
-        </tbody>
-      </table>
+              </div>
+
+
+
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="Role" class="col-sm-2 col-form-label">Role</label>
+            <div class="col-sm-5">
+              <input type="number" class="form-control" id="Role" value="" formControlName="role">
+
+              <div *ngIf="submitted && f['role'].errors && f['role'].touched">
+                <div style="color: red;" *ngIf="f['role'].errors['required']">This field is required</div>
+
+              </div>
+
+
+
+
+            </div>
+          </div>
+          <div class="col-sm-5 d-flex justify-content-center">
+
+            <button type="button" class="btn btn-primary" (click)="Add_DATA_Function()">ADD</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5">
+        <table class="table">
+          <thead>
+
+            <tr>
+              <th scope="col">#ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Role</th>
+              <th scope="col"> Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of app_Storage_Data">
+              <td>{{x.id}}</td>
+              <td>{{x.name}}</td>
+              <td>{{x.role}}</td>
+              <td>
+                <button type="button" class="btn btn-secondary" (click)="get_ID_DATA(x.id)">Edit</button>&nbsp;
+                <button type="button" class="btn btn-warning" (click)="Delete_ID_DATA(x.id)">Delete</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+
+
+  <!-- //-------------------------Model--------------- -->
+

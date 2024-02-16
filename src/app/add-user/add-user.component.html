@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>#Add</h2>
+    <mat-dialog-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+              <form [formGroup]="addFormRecord">
+                <p>
+                    <label for="name">Name: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-form-field appearance="fill">
+                        <mat-label>User Name</mat-label>
+                        <input matInput placeholder="Yash..." id="name" name="name" formControlName="name">
+                    </mat-form-field>
+                </p>
+                <div *ngIf="submitted && f['name'].errors && f['name'].touched">
+                    <div style="color: red;" *ngIf="f['name'].errors['required']">This field is required</div>
+                </div>
+
+                <p>
+                    <label for="email">Email: </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="yash@gmail..."  id="email" name="email" formControlName="email">
+                    </mat-form-field>
+                </p>
+
+                <div *ngIf="submitted && f['email'].errors && f['email'].touched">
+                    <div style="color: red;" *ngIf="f['email'].errors['required']">This field is required</div>
+                    <div style="color: red;" *ngIf="f['email'].errors?.['pattern']">Please enter valid email address</div>
+                </div>
+
+                <p>
+                    <label for="address">Addres: </label>&nbsp;
+                    <mat-form-field appearance="fill">
+                        <mat-label>Address</mat-label>
+                        <input matInput placeholder="47/8 Avantipura..." id="address" name="address" formControlName="address">
+                    </mat-form-field>
+                </p>
+
+                <div *ngIf="submitted && f['address'].errors && f['address'].touched">
+                    <div style="color: red;" *ngIf="f['address'].errors['required']">This field is required</div>
+                </div><br>
+
+                <div style="float: inline-end;">
+                    <button class="btn btn-primary" type="submit" (click)="onSubmit()" [style.display]="addButton">Add User</button>
+                    <button class="btn btn-primary" type="submit" (click)="updateUser()" [style.display]="editButton">Update User</button>
+                </div>
+
+              </form>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions style="float: inline-end;">
+        <button mat-button mat-dialog-close>Close</button>
+    </mat-dialog-actions>

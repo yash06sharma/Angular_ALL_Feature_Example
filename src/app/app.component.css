@@ -3,7 +3,11 @@ p {
 }
 
 
-mat-sidenav-content,
+mat-sidenav-content{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+}
 mat-sidenav-container
 {
   height: 100%;
@@ -16,3 +20,14 @@ mat-sidenav{
    background-color: #f4f4f4;
    height: 100%;
 }
+
+
+/* .ex{
+  background-color: red;
+}
+.exm{
+  background-color: green;
+}
+exmp{
+  background-color: yellow;
+} */

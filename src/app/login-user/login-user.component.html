@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <h1>#Login</h1>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <form class="example-form" [formGroup]="loginForm" novalidate>
+
+        <div class="mb-3 row">
+          <label for="Email" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" value="" formControlName="email">
+            <div *ngIf="submitted && login['email'].errors && login['email'].touched">
+              <div style="color: red;" *ngIf="login['email'].errors['required']">This field is required</div>
+              <div style="color: red;" *ngIf="login['email'].errors?.['pattern']">Please enter valid email address</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3 row">
+          <label for="Password" class="col-sm-2 col-form-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="password" value="" formControlName="password">
+              <div *ngIf="submitted && login['password'].errors && login['password'].touched">
+                <div style="color: red;" *ngIf="login['password'].errors['required']">This field is required</div>
+              </div>
+          </div>
+        </div>
+
+        <div class="col-sm-5 d-flex justify-content-center">
+          <button type="submit" class="btn btn-info" (click)="loginUserRecord()">LogIn</button>&nbsp;
+          <button type="button" class="btn btn-outline-warning" [mat-dialog-close]>Close</button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>

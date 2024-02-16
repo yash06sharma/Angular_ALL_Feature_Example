@@ -1,0 +1,42 @@
+<h1>Angular Nested FormArray / Dynamic FormArray</h1>
+
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="employees">
+    <div *ngFor="let employee of employees().controls; let empIndex=index">
+      <div
+        [formGroupName]="empIndex"
+        style="border: 1px solid blue; padding: 10px; width: 600px; margin: 5px;">
+        {{empIndex}} First Name :
+        <input type="text" formControlName="firstName" class="form-control"/>
+        Last Name:
+        <input type="text" formControlName="lastName" class="form-control" />
+
+        <button class="btn btn-info btn-sm" (click)="removeEmployee(empIndex)">Remove</button>
+
+        <div formArrayName="skills">
+          <div
+            *ngFor="let skill of employeeSkills(empIndex).controls; let skillIndex=index">
+            <div [formGroupName]="skillIndex">
+              {{skillIndex}} Skill :
+              <input type="text" formControlName="skill" class="form-control" />
+              Exp:
+              <input type="text" formControlName="exp" class="form-control" />
+
+              <button class="btn btn-warning btn-sm" (click)="removeEmployeeSkill(empIndex,skillIndex)">
+                Remove
+              </button>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="addEmployeeSkill(empIndex)">
+          Add Skill
+        </button>
+      </div>
+    </div>
+    <button type="button" (click)="addEmployee()" class="btn btn-light">Add Employee</button>
+  </div>
+    <button type="submit" class="btn btn-primary btn-sm">Register</button>
+</form>
+
+{{this.empForm.value | json}}
+

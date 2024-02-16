@@ -1,0 +1,27 @@
+<div style="text-align:center; margin-top: 100px; ">
+  <mat-card style="margin-top:10px; width: 50%;">
+          <mat-card-content>
+            <ul>
+              <li *ngIf="files && files.length > 0" style=" list-style-type: none" >
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped" [style.width.%]="files[0]?.progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <span id="file-label" *ngIf="files[0]?.data">
+                  File Uploadedx`...
+                </span>
+
+              </li>
+            </ul>
+
+            <!-- <span *ngIf="files[0]?.progress == 100">File Uploaded Successfully!</span> -->
+          </mat-card-content><br><br>
+
+          <mat-card-actions  class="bg-warning">
+              <button mat-button color="warn" (click)="onClick()">
+                  <mat-icon>file_upload</mat-icon>
+                  Upload
+              </button>
+          </mat-card-actions>
+      </mat-card>
+  <input type="file" #fileUpload id="fileUpload" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" />
+  </div>
